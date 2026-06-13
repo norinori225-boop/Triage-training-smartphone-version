@@ -1,17 +1,17 @@
 /* トリアージ訓練 スマホ版 PWA Service Worker */
 /* アプリ更新時は CACHE_VERSION を上げること（古いキャッシュを自動削除します） */
-const CACHE_VERSION = 'triage-v1';
+const CACHE_VERSION = 'triage-v2';
 
 /* オフラインで動かすために事前キャッシュするファイル */
 const PRECACHE_URLS = [
   './',
   './index.html',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-192.png',
-  './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png'
+  './icon-192.png',
+  './icon-512.png',
+  './icon-maskable-192.png',
+  './icon-maskable-512.png',
+  './apple-touch-icon.png'
 ];
 
 /* インストール時：必要ファイルをキャッシュ */
