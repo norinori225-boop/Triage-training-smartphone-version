@@ -312,16 +312,16 @@ START 5: 指示に従えるか（従命反応）？
 
 基準タグ決定: 歩行可 → <span style="color:var(--green);font-weight:bold">緑</span> ／ 歩行不可 → <span style="color:#E65100;font-weight:bold">黄</span>
 
-第3段階 受傷機転（該当で<b>1区分上げ</b>）
+第3段階 受傷機転（該当で<b>緑→黄に1区分上げ</b>）
   体幹部・1肢以上の挟圧（4時間以上）／爆発
   高所墜落／異常温度環境／NBC災害
 
-第4段階 災害時要援護者（該当で<b>1区分上げ</b>）
+第4段階 災害時要援護者（該当で<b>緑→黄に1区分上げ</b>）
   小児（≤15歳）／高齢者（≥65歳）／妊婦
   基礎疾患患者（心・呼吸器・糖尿病・肝硬変・透析・出血性疾患）
 
   ※第3・第4は多重に上げない（1段階のみ）
-  ※緑→黄 ／ 黄→赤 への引き上げのみ（赤→赤は変化なし）
+  ※引き上げは<b>緑→黄のみ</b>（黄は据え置き＝黄→赤にはしない／赤→赤も変化なし）
   ※黒タグは2次対象外</div>
   <div class="rules-foot">
     <button onclick="showScreen('sc-title')">← タイトルへ</button>
@@ -408,7 +408,8 @@ function vulnList(p,cfg){
   return o;
 }
 function vulnHit(p,cfg){ return vulnList(p,cfg).length>0; }
-function bumpUp(t){ return t==='GREEN'?'YELLOW':t==='YELLOW'?'RED':t; }
+// 第3・第4段階の引き上げは「緑→黄」のみ。黄は据え置き（黄→赤にはしない）、赤も変化なし。
+function bumpUp(t){ return t==='GREEN'?'YELLOW':t; }
 function judge2(p,cfg){
   cfg=cfg||PAT_CFG;
   const s=p.secondary;
@@ -452,8 +453,9 @@ function triageStep(p,isPAT){
     if(typeof s.temp==='number'&&s.temp<=PAT_CFG.TEMP_LOW) return {key:'PAT第1段階_体温',label:'PAT第1段階 体温'};
     if(s.shock) return {key:'PAT第1段階_ショック',label:'PAT第1段階 ショック'};
     if(anatHit(s)) return {key:'PAT第2段階_解剖学的所見',label:'PAT第2段階 解剖学的所見'};
-    if(mechanismHit(p)) return {key:'PAT第3段階_受傷機転',label:'PAT第3段階 受傷機転'};
-    if(vulnHit(p)) return {key:'PAT第4段階_要援護者',label:'PAT第4段階 要援護者'};
+    // 引き上げは緑→黄のみ。歩行可（緑基準）のときだけ第3・第4段階が判定を左右する。
+    if(p.canWalk&&mechanismHit(p)) return {key:'PAT第3段階_受傷機転',label:'PAT第3段階 受傷機転'};
+    if(p.canWalk&&vulnHit(p)) return {key:'PAT第4段階_要援護者',label:'PAT第4段階 要援護者'};
     return {key:'PAT基準タグ',label:'PAT基準タグ'};
   }
   if(CFG.WALK_GREEN&&p.canWalk) return {key:'START1_歩行',label:'START1 歩行'};
@@ -586,9 +588,9 @@ const SECONDARY=[
   S({rr:22,pulse:88,sbp:132,dbp:84,spo2:95,temp:36.8},'咳嗽継続。経過観察が必要'),                                                             // 4 緑→黄（基礎疾患:喘息）
   S({pulse:78,sbp:148,dbp:90,spo2:97},'打撲のみで安定'),                                                                       // 5 緑→緑
   S({rr:18,pulse:86,sbp:128,spo2:97,temp:36.7},'明らかな悪化なし。経過観察'),                                                            // 6 黄→黄
-  S({rr:22,pulse:92,sbp:116,dbp:72,temp:36.8,obs:['足関節の変形・腫脹']},'足関節の変形・腫脹'),           // 7 黄→赤（第4段階:妊婦30週）
+  S({rr:22,pulse:92,sbp:116,dbp:72,temp:36.8,obs:['足関節の変形・腫脹']},'足関節の変形・腫脹'),           // 7 黄→黄（第4段階:妊婦30週に該当も黄据え置き）
   S({rr:24,pulse:94,sbp:126,spo2:97},'胸部症状継続'),                                                          // 8 黄→黄
-  S({gcs:13,rr:20,pulse:92,sbp:142,dbp:110,spo2:94,temp:37.0,obs:['大腿部の腫脹']},'大腿部の腫脹が増大。頻脈・血圧上昇・SpO2低下あり'),                   // 9 黄→赤（第4段階:高齢65・糖尿）
+  S({gcs:13,rr:20,pulse:92,sbp:142,dbp:110,spo2:94,temp:37.0,obs:['大腿部の腫脹']},'大腿部の腫脹が増大。頻脈・血圧上昇・SpO2低下あり'),                   // 9 黄→黄（第4段階:高齢65・糖尿に該当も黄据え置き）
   S({rr:23,pulse:76,sbp:128,temp:36.5,anatomical:['両下肢の運動・感覚消失']},'両下肢の運動・感覚消失'),              // 10 黄→赤（解剖）
   S({rr:29,pulse:82,sbp:112,dbp:70,spo2:99,temp:36.4},'膝の痛みのみ'),                                                       // 11 黄→黄
   S({rr:29,dbp:80,temp:36.5},'麻痺所見なし。神経学的に安定'),                                                           // 12 黄→黄
@@ -1003,10 +1005,12 @@ function judge2ExplainText(p){
   s+='第2段階: 基準に該当する解剖学的所見なし<br>';
   const base=p.canWalk?'GREEN':'YELLOW';
   s+=`基準タグ: ${p.canWalk?'歩行可→緑':'歩行不可→黄'}<br>`;
-  if(r.mech.length>0){s+=`<b>第3段階 受傷機転:</b> ${r.mech.join('、')} → 1区分上げ<br>`;}
-  if(r.vuln.length>0){s+=`<b>第4段階 要援護者:</b> ${r.vuln.join('、')} → 1区分上げ<br>`;}
+  if(r.mech.length>0){s+=`<b>第3段階 受傷機転:</b> ${r.mech.join('、')}<br>`;}
+  if(r.vuln.length>0){s+=`<b>第4段階 要援護者:</b> ${r.vuln.join('、')}<br>`;}
   const final=judge2(p);
+  const hit=r.mech.length>0||r.vuln.length>0;
   if(final!==base){s+=`→ ${tagTxt(base)} を1区分上げ → <b>${tagTxt(final)}</b> 確定`;}
+  else if(hit){s+=`→ 第3・第4段階に該当するが、引き上げは緑→黄のみ。黄は据え置き → <b>${tagTxt(final)}</b> 確定`;}
   else{s+=`→ 第3・第4段階 非該当 → <b>${tagTxt(final)}</b>`;}
   return s;
 }

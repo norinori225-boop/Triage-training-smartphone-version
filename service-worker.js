@@ -1,6 +1,6 @@
 /* トリアージ訓練 スマホ版 PWA Service Worker */
 /* アプリ更新時は CACHE_VERSION を上げること（古いキャッシュを自動削除します） */
-const CACHE_VERSION = 'triage-v2';
+const CACHE_VERSION = 'triage-v3';
 
 /* オフラインで動かすために事前キャッシュするファイル */
 const PRECACHE_URLS = [
