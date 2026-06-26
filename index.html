@@ -229,7 +229,7 @@ button{font-family:inherit;-webkit-user-select:none;user-select:none;}
       <button class="btn-sub" onclick="showScreen('sc-rules-pat')">PAT法確認</button>
     </div>
   </div>
-  <div class="ver">スマホ版 Ver.1.1 ｜ 2026-06-12 ｜ 駿東伊豆消防本部</div>
+  <div class="ver">スマホ版 Ver.1.2 ｜ 2026-06-23 ｜ 駿東伊豆消防本部</div>
 </div>
 </div>
 
@@ -468,97 +468,101 @@ function triageStep(p,isPAT){
 // ============================================================
 // PATIENTS DATA（統合版 patients.js と同一。No.整合のため全件保持）
 // ============================================================
+// === SSOT-DATA:BEGIN ===
 const PT=[
 // 0 GREEN
-{name:'サトウ ハナコ',age:23,d:'23歳女性。転倒後、ひざを押さえて立っている。呼びかけにはすぐ返答し、周囲を見回している。',canWalk:true,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:78,followsCommands:true},
+{name:'サトウ ハナコ',age:23,narrative:'女性。転倒後、ひざを押さえて立っている。呼びかけにはすぐ返答し、周囲を見回している。',canWalk:true,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:78,followsCommands:true},
 // 1 GREEN
-{name:'タナカ ケンジ',age:34,d:'34歳男性。群衆に押されて転倒。肩を押さえながら自力で歩き、質問には落ち着いて答える。',canWalk:true,breathing:'yes',respiratoryRate:18,radialPulse:'normal',paleColdSweat:false,heartRate:72,followsCommands:true},
+{name:'タナカ ケンジ',age:34,narrative:'男性。群衆に押されて転倒。肩を押さえながら自力で歩き、質問には落ち着いて答える。',canWalk:true,breathing:'yes',respiratoryRate:18,radialPulse:'normal',paleColdSweat:false,heartRate:72,followsCommands:true},
 // 2 GREEN
-{name:'ヤマモト ミカ',age:42,d:'42歳女性。頭を押さえて不安そうにしているが、声かけで立ち上がり歩ける。受け答えは明瞭。',canWalk:true,breathing:'yes',respiratoryRate:22,radialPulse:'normal',paleColdSweat:false,heartRate:80,followsCommands:true},
+{name:'ヤマモト ミカ',age:42,narrative:'女性。頭を押さえて不安そうにしているが、声かけで立ち上がり歩ける。受け答えは明瞭。',canWalk:true,breathing:'yes',respiratoryRate:22,radialPulse:'normal',paleColdSweat:false,heartRate:80,followsCommands:true},
 // 3 GREEN
-{name:'コバヤシ ショウタ',age:16,d:'16歳男性。電車から自力で出てきた。すねに擦過傷があり、足をかばいながら歩いている。',canWalk:true,breathing:'yes',respiratoryRate:24,radialPulse:'normal',paleColdSweat:false,heartRate:76,followsCommands:true},
+{name:'コバヤシ ショウタ',age:16,narrative:'男性。電車から自力で出てきた。すねに擦過傷があり、足をかばいながら歩いている。',canWalk:true,breathing:'yes',respiratoryRate:24,radialPulse:'normal',paleColdSweat:false,heartRate:76,followsCommands:true},
 // 4 GREEN
-{name:'ナカムラ ヒロシ',age:52,d:'52歳男性。目をこすり咳き込みながら、自力で風上側へ歩いてくる。会話はできる。',canWalk:true,breathing:'yes',respiratoryRate:26,radialPulse:'normal',paleColdSweat:false,heartRate:84,followsCommands:true},
+{name:'ナカムラ ヒロシ',age:52,narrative:'男性。目をこすり咳き込みながら、自力で風上側へ歩いてくる。会話はできる。',canWalk:true,breathing:'yes',respiratoryRate:26,radialPulse:'normal',paleColdSweat:false,heartRate:84,followsCommands:true},
 // 5 GREEN
-{name:'イトウ ユキコ',age:62,d:'62歳女性。倒壊物を避けて歩いてきた。腕に打撲痕があり、痛みを訴えるが歩行は保たれている。',canWalk:true,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:72,followsCommands:true},
+{name:'イトウ ユキコ',age:62,narrative:'女性。倒壊物を避けて歩いてきた。腕に打撲痕があり、痛みを訴えるが歩行は保たれている。',canWalk:true,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:72,followsCommands:true},
 // 6 YELLOW
-{name:'ワタナベ タカシ',age:51,d:'51歳男性。床に座り込み、立てないと訴える。呼吸18回/分、橈骨触知可、皮膚色は保たれている。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:18,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
+{name:'ワタナベ タカシ',age:51,narrative:'男性。床に座り込み、立てないと訴える。橈骨触知可、皮膚色は保たれている。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:18,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
 // 7 YELLOW
-{name:'マツモト サクラ',age:32,d:'32歳女性。足首を押さえてうずくまっている。強い痛みで立てない。呼吸22回/分、橈骨触知可。指示に従える。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'normal',paleColdSweat:false,heartRate:92,followsCommands:true},
+{name:'マツモト サクラ',age:32,narrative:'女性。足首を押さえてうずくまっている。強い痛みで立てない。橈骨触知可。指示に従える。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'normal',paleColdSweat:false,heartRate:92,followsCommands:true},
 // 8 YELLOW
-{name:'キムラ マサト',age:43,d:'43歳男性。胸を押さえて座り込んでいる。呼吸24回/分、橈骨触知可、皮膚蒼白なし。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:24,radialPulse:'normal',paleColdSweat:false,heartRate:108,followsCommands:true},
+{name:'キムラ マサト',age:43,narrative:'男性。胸を押さえて座り込んでいる。橈骨触知可、皮膚蒼白なし。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:24,radialPulse:'normal',paleColdSweat:false,heartRate:108,followsCommands:true},
 // 9 YELLOW
-{name:'ヨシダ フミコ',age:65,d:'65歳女性。太ももを押さえて倒れており、立てない。呼吸20回/分、橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:112,followsCommands:true},
+{name:'ヨシダ フミコ',age:65,narrative:'女性。太ももを押さえて倒れており、立てない。橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:112,followsCommands:true},
 // 10 YELLOW
-{name:'イノウエ シュンイチ',age:55,d:'55歳男性。仰向けで腰の痛みを訴え、動かないようにしている。呼吸23回/分、橈骨触知可。指示に従える。',canWalk:false,breathing:'yes',respiratoryRate:23,radialPulse:'normal',paleColdSweat:false,heartRate:90,followsCommands:true},
+{name:'イノウエ シュンイチ',age:55,narrative:'男性。仰向けで腰の痛みを訴え、動かないようにしている。橈骨触知可。指示に従える。',canWalk:false,breathing:'yes',respiratoryRate:23,radialPulse:'normal',paleColdSweat:false,heartRate:90,followsCommands:true},
 // 11 YELLOW
-{name:'オカダ カナ',age:25,d:'25歳女性。膝を強く打ち、座り込んで立てない。呼吸29回/分、橈骨触知可、皮膚蒼白なし。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:29,radialPulse:'normal',paleColdSweat:false,heartRate:94,followsCommands:true},
+{name:'オカダ カナ',age:25,narrative:'女性。膝を強く打ち、座り込んで立てない。橈骨触知可、皮膚蒼白なし。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:29,radialPulse:'normal',paleColdSweat:false,heartRate:94,followsCommands:true},
 // 12 YELLOW
-{name:'ハヤシ リョウ',age:38,d:'38歳男性。背部痛を訴えて動けず、仰向けで待っている。呼吸29回/分、橈骨触知可、皮膚色は保たれている。従命可。',canWalk:false,breathing:'yes',respiratoryRate:29,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
+{name:'ハヤシ リョウ',age:38,narrative:'男性。背部痛を訴えて動けず、仰向けで待っている。橈骨触知可、皮膚色は保たれている。従命可。',canWalk:false,breathing:'yes',respiratoryRate:29,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
 // 13 RED 頻呼吸
-{name:'モリ タダシ',age:60,d:'60歳男性。胸を押さえて苦しそうにしている。呼吸34回/分。顔をしかめ、短い返答はできる。橈骨触知可。',canWalk:false,breathing:'yes',respiratoryRate:34,radialPulse:'normal',paleColdSweat:false,heartRate:90,followsCommands:true},
+{name:'モリ タダシ',age:60,narrative:'男性。胸を押さえて苦しそうにしている。顔をしかめ、短い返答はできる。橈骨触知可。',canWalk:false,breathing:'yes',respiratoryRate:34,radialPulse:'normal',paleColdSweat:false,heartRate:90,followsCommands:true},
 // 14 RED 頻呼吸
-{name:'カワカミ エリコ',age:45,d:'45歳女性。地面に横たわり、肩で息をしている。呼吸30回/分。橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:30,radialPulse:'normal',paleColdSweat:false,heartRate:100,followsCommands:true},
+{name:'カワカミ エリコ',age:45,narrative:'女性。地面に横たわり、肩で息をしている。橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:30,radialPulse:'normal',paleColdSweat:false,heartRate:100,followsCommands:true},
 // 15 RED 頻呼吸
-{name:'アベ ケンタ',age:30,d:'30歳男性。車外に座り込み、息苦しさを訴える。呼吸30回/分。橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:30,radialPulse:'normal',paleColdSweat:false,heartRate:95,followsCommands:true},
+{name:'アベ ケンタ',age:30,narrative:'男性。車外に座り込み、息苦しさを訴える。橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:30,radialPulse:'normal',paleColdSweat:false,heartRate:95,followsCommands:true},
 // 16 RED 頻呼吸
-{name:'フジワラ テツヤ',age:50,d:'50歳男性。肩に落下物が当たり、壁にもたれている。呼吸31回/分。橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:31,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
+{name:'フジワラ テツヤ',age:50,narrative:'男性。肩に落下物が当たり、壁にもたれている。橈骨触知可。呼びかけに従える。',canWalk:false,breathing:'yes',respiratoryRate:31,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
 // 17 RED 徐呼吸
-{name:'タカハシ ヨシノブ',age:70,d:'70歳男性。頭部を打ち、呼びかけへの反応が鈍い。呼吸8回/分。橈骨触知可。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:8,radialPulse:'normal',paleColdSweat:false,heartRate:64,followsCommands:false},
+{name:'タカハシ ヨシノブ',age:70,narrative:'男性。頭部を打ち、呼びかけへの反応が鈍い。橈骨触知可。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:8,radialPulse:'normal',paleColdSweat:false,heartRate:64,followsCommands:false},
 // 18 RED 徐呼吸（化学剤曝露）
-{name:'オオシマ キヨコ',age:55,d:'55歳女性。化学剤（神経剤）の汚染区域から救出。呼吸はゆっくり浅く6回/分。橈骨触知可。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:6,radialPulse:'normal',paleColdSweat:false,heartRate:58,followsCommands:false},
+{name:'オオシマ キヨコ',age:55,narrative:'女性。化学剤（神経剤）の汚染区域から救出。呼吸はゆっくり浅い。橈骨触知可。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:6,radialPulse:'normal',paleColdSweat:false,heartRate:58,followsCommands:false},
 // 19 RED 徐呼吸
-{name:'ゴトウ イサム',age:80,d:'80歳男性。外傷後、目を閉じてうめき声のみ。呼吸9回/分。橈骨触知可。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:9,radialPulse:'normal',paleColdSweat:false,heartRate:96,followsCommands:false},
+{name:'ゴトウ イサム',age:80,narrative:'男性。外傷後、目を閉じてうめき声のみ。橈骨触知可。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:9,radialPulse:'normal',paleColdSweat:false,heartRate:96,followsCommands:false},
 // 20 RED 橈骨不可
-{name:'ニシムラ リョウスケ',age:35,d:'35歳男性。下肢から出血が続き、地面に座り込んでいる。橈骨動脈触知不可。皮膚蒼白・冷汗あり。',canWalk:false,breathing:'yes',respiratoryRate:24,radialPulse:'none',paleColdSweat:true,heartRate:130,followsCommands:true},
+{name:'ニシムラ リョウスケ',age:35,narrative:'男性。下肢から出血が続き、地面に座り込んでいる。橈骨動脈触知不可。皮膚蒼白・冷汗あり。',canWalk:false,breathing:'yes',respiratoryRate:24,radialPulse:'none',paleColdSweat:true,heartRate:130,followsCommands:true},
 // 21 RED 橈骨不可
-{name:'オガワ マリ',age:28,d:'28歳女性。腹部を押さえてうずくまり、顔色が悪い。呼吸22回/分、橈骨動脈触知不可。冷汗あり。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'none',paleColdSweat:true,heartRate:126,followsCommands:true},
+{name:'オガワ マリ',age:28,narrative:'女性。腹部を押さえてうずくまり、顔色が悪い。橈骨動脈触知不可。冷汗あり。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'none',paleColdSweat:true,heartRate:126,followsCommands:true},
 // 22 RED 橈骨微弱・頻脈（挟圧）
-{name:'ハシモト コウイチ',age:42,d:'42歳男性。左大腿部から下肢にかけて4時間以上の挟圧を受け救出された。救出後も動けず、橈骨動脈は触れるが弱い。脈拍124回/分。',canWalk:false,breathing:'yes',respiratoryRate:20,radialPulse:'weak',paleColdSweat:false,heartRate:124,followsCommands:true},
+{name:'ハシモト コウイチ',age:42,narrative:'男性。左大腿部から下肢にかけて4時間以上の挟圧を受け救出された。救出後も動けず、橈骨動脈は触れるが弱い。',canWalk:false,breathing:'yes',respiratoryRate:20,radialPulse:'weak',paleColdSweat:false,heartRate:124,followsCommands:true},
 // 23 RED 橈骨微弱
-{name:'マエダ ヨシコ',age:67,d:'67歳女性。多発骨折。橈骨動脈は触れるが末梢微弱。皮膚蒼白あり。従命可。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'weak',paleColdSweat:true,heartRate:110,followsCommands:true},
+{name:'マエダ ヨシコ',age:67,narrative:'女性。多発骨折。橈骨動脈は触れるが末梢微弱。皮膚蒼白あり。従命可。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'weak',paleColdSweat:true,heartRate:110,followsCommands:true},
 // 24 RED 橈骨不可（体幹挟圧）
-{name:'ホンダ カズヤ',age:53,d:'53歳男性。体幹部に4時間以上の挟圧を受け救出された。橈骨動脈触知不可。皮膚蒼白・冷汗あり。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:25,radialPulse:'none',paleColdSweat:true,heartRate:118,followsCommands:false},
+{name:'ホンダ カズヤ',age:53,narrative:'男性。体幹部に4時間以上の挟圧を受け救出された。橈骨動脈触知不可。皮膚蒼白・冷汗あり。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:25,radialPulse:'none',paleColdSweat:true,heartRate:118,followsCommands:false},
 // 25 RED 従命不可
-{name:'カノウ マサキ',age:44,d:'44歳男性。頭部外傷。呼吸18回/分、橈骨触知可・循環不全徴候なし。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:18,radialPulse:'normal',paleColdSweat:false,heartRate:92,followsCommands:false},
+{name:'カノウ マサキ',age:44,narrative:'男性。頭部外傷。橈骨触知可・循環不全徴候なし。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:18,radialPulse:'normal',paleColdSweat:false,heartRate:92,followsCommands:false},
 // 26 RED 従命不可（高所墜落）
-{name:'ミヤモト サチコ',age:70,d:'70歳女性。3階相当（約9m）の高所から墜落。呼吸20回/分、橈骨触知可・循環不全徴候なし。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:108,followsCommands:false},
+{name:'ミヤモト サチコ',age:70,narrative:'女性。3階相当（約9m）の高所から墜落。橈骨触知可・循環不全徴候なし。指示に従えない。',canWalk:false,breathing:'yes',respiratoryRate:20,radialPulse:'normal',paleColdSweat:false,heartRate:108,followsCommands:false},
 // 27 RED 気道確保後再開
-{name:'クドウ ケンジ',age:62,d:'62歳男性。呼吸停止。気道確保（頭部後屈顎先挙上）にて呼吸再開。',canWalk:false,breathing:'afterAirway',respiratoryRate:null,radialPulse:'normal',paleColdSweat:false,heartRate:100,followsCommands:false},
+{name:'クドウ ケンジ',age:62,narrative:'男性。呼吸停止。気道確保（頭部後屈顎先挙上）にて呼吸再開。',canWalk:false,breathing:'afterAirway',respiratoryRate:null,radialPulse:'normal',paleColdSweat:false,heartRate:100,followsCommands:false},
 // 28 RED 気道確保後再開
-{name:'ヒライ ノリコ',age:55,d:'55歳女性。顔面骨折により気道閉塞。気道確保後に自発呼吸再開。',canWalk:false,breathing:'afterAirway',respiratoryRate:null,radialPulse:'normal',paleColdSweat:false,heartRate:104,followsCommands:false},
+{name:'ヒライ ノリコ',age:55,narrative:'女性。顔面骨折により気道閉塞。気道確保後に自発呼吸再開。',canWalk:false,breathing:'afterAirway',respiratoryRate:null,radialPulse:'normal',paleColdSweat:false,heartRate:104,followsCommands:false},
 // 29 BLACK
-{name:'ウエダ ハツコ',age:75,d:'75歳女性。建物の下敷き。呼吸なし。気道確保後も呼吸再開なし。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
+{name:'ウエダ ハツコ',age:75,narrative:'女性。建物の下敷き。呼吸なし。気道確保後も呼吸再開なし。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
 // 30 BLACK
-{name:'シマダ マコト',age:40,d:'40歳男性。多発外傷。自発呼吸なし。気道確保後も呼吸再開しない。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
+{name:'シマダ マコト',age:40,narrative:'男性。多発外傷。自発呼吸なし。気道確保後も呼吸再開しない。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
 // 31 BLACK
-{name:'タジマ ミツル',age:65,d:'65歳男性。頭部外傷後、耳周囲に出血がある。気道確保にもかかわらず呼吸再開せず。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
+{name:'タジマ ミツル',age:65,narrative:'男性。頭部外傷後、耳周囲に出血がある。気道確保にもかかわらず呼吸再開せず。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
 // 32 BLACK
-{name:'ムラカミ アヤコ',age:50,d:'50歳女性。電車事故で重篤。呼吸停止。気道確保後も変化なし。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
+{name:'ムラカミ アヤコ',age:50,narrative:'女性。電車事故で重篤。呼吸停止。気道確保後も変化なし。',canWalk:false,breathing:'noneAfterAirway',respiratoryRate:null,radialPulse:'none',paleColdSweat:false,heartRate:0,followsCommands:false},
 // 33 YELLOW 境界値
-{name:'サカモト ヨウコ',age:46,d:'46歳女性。腹部を打ち、痛みを訴えて横になっている。呼吸21回/分、橈骨触知可、皮膚色は保たれている。従命可。',canWalk:false,breathing:'yes',respiratoryRate:21,radialPulse:'normal',paleColdSweat:false,heartRate:90,followsCommands:true},
+{name:'サカモト ヨウコ',age:46,narrative:'女性。腹部を打ち、痛みを訴えて横になっている。橈骨触知可、皮膚色は保たれている。従命可。',canWalk:false,breathing:'yes',respiratoryRate:21,radialPulse:'normal',paleColdSweat:false,heartRate:90,followsCommands:true},
 // 34 YELLOW 境界値（RR=10）
-{name:'アオキ コウタ',age:29,d:'29歳男性。右大腿部挟圧受傷。呼吸10回/分（正常下限）、橈骨触知可・循環不全徴候なし。従命可。',canWalk:false,breathing:'yes',respiratoryRate:10,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
+{name:'アオキ コウタ',age:29,narrative:'男性。右大腿部挟圧受傷。橈骨触知可・循環不全徴候なし。従命可。',canWalk:false,breathing:'yes',respiratoryRate:10,radialPulse:'normal',paleColdSweat:false,heartRate:88,followsCommands:true},
 // 35 YELLOW 境界値
-{name:'フクダ ナオミ',age:44,d:'44歳女性。刺激臭のある区域から離脱後、座り込んでいる。呼吸10回/分、橈骨触知可、皮膚色は保たれている。従命可。',canWalk:false,breathing:'yes',respiratoryRate:10,radialPulse:'normal',paleColdSweat:false,heartRate:100,followsCommands:true},
+{name:'フクダ ナオミ',age:44,narrative:'女性。刺激臭のある区域から離脱後、座り込んでいる。橈骨触知可、皮膚色は保たれている。従命可。',canWalk:false,breathing:'yes',respiratoryRate:10,radialPulse:'normal',paleColdSweat:false,heartRate:100,followsCommands:true},
 // 36 RED 橈骨不可（爆発）
-{name:'ナカガワ トシユキ',age:55,d:'55歳男性。爆発後に倒れており、呼びかけへの反応が鈍い。呼吸29回/分、橈骨動脈触知不可。',canWalk:false,breathing:'yes',respiratoryRate:29,radialPulse:'none',paleColdSweat:false,heartRate:128,followsCommands:false},
+{name:'ナカガワ トシユキ',age:55,narrative:'男性。爆発後に倒れており、呼びかけへの反応が鈍い。橈骨動脈触知不可。',canWalk:false,breathing:'yes',respiratoryRate:29,radialPulse:'none',paleColdSweat:false,heartRate:128,followsCommands:false},
 // 37 RED 徐呼吸（化学剤）
-{name:'オノ ユカ',age:33,d:'33歳女性。化学剤（神経剤）の汚染区域で倒れていた。呼吸8回/分。自力歩行不可。呼びかけへの反応は乏しい。',canWalk:false,breathing:'yes',respiratoryRate:8,radialPulse:'normal',paleColdSweat:false,heartRate:56,followsCommands:false},
+{name:'オノ ユカ',age:33,narrative:'女性。化学剤（神経剤）の汚染区域で倒れていた。自力歩行不可。呼びかけへの反応は乏しい。',canWalk:false,breathing:'yes',respiratoryRate:8,radialPulse:'normal',paleColdSweat:false,heartRate:56,followsCommands:false},
 // 38 RED 橈骨微弱（爆発）
-{name:'タムラ ヒロキ',age:62,d:'62歳男性。爆風で転倒。呼吸22回/分。橈骨動脈は触れるが末梢微弱。従命可。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'weak',paleColdSweat:false,heartRate:114,followsCommands:true},
+{name:'タムラ ヒロキ',age:62,narrative:'男性。爆風で転倒。橈骨動脈は触れるが末梢微弱。従命可。',canWalk:false,breathing:'yes',respiratoryRate:22,radialPulse:'weak',paleColdSweat:false,heartRate:114,followsCommands:true},
 // 39 RED 頻呼吸
-{name:'コンドウ トオル',age:62,d:'62歳男性。胸部を強く打ち、浅く速い呼吸をしている。呼吸31回/分、橈骨触知可。従命可。',canWalk:false,breathing:'yes',respiratoryRate:31,radialPulse:'normal',paleColdSweat:false,heartRate:112,followsCommands:true},
+{name:'コンドウ トオル',age:62,narrative:'男性。胸部を強く打ち、浅く速い呼吸をしている。橈骨触知可。従命可。',canWalk:false,breathing:'yes',respiratoryRate:31,radialPulse:'normal',paleColdSweat:false,heartRate:112,followsCommands:true},
 // 40 GREEN（トリッキー：歩行可だがRR↑）
-{name:'ヤマシタ コウキ',age:31,d:'31歳男性。建物崩落から自力で逃げてきた。胸を押さえながら歩いている。呼吸34回/分と促迫。',canWalk:true,breathing:'yes',respiratoryRate:34,radialPulse:'normal',paleColdSweat:false,heartRate:118,followsCommands:true},
+{name:'ヤマシタ コウキ',age:31,narrative:'男性。建物崩落から自力で逃げてきた。胸を押さえながら歩いている。呼吸が促迫している。',canWalk:true,breathing:'yes',respiratoryRate:34,radialPulse:'normal',paleColdSweat:false,heartRate:118,followsCommands:true},
 // 41 GREEN（トリッキー：歩行可）
-{name:'サイトウ エツコ',age:51,d:'51歳女性。爆発後フラフラしながら自力歩行で救護所に来た。顔色不良。',canWalk:true,breathing:'yes',respiratoryRate:22,radialPulse:'normal',paleColdSweat:false,heartRate:110,followsCommands:true},
+{name:'サイトウ エツコ',age:51,narrative:'女性。爆発後フラフラしながら自力歩行で救護所に来た。顔色不良。',canWalk:true,breathing:'yes',respiratoryRate:22,radialPulse:'normal',paleColdSweat:false,heartRate:110,followsCommands:true},
 // 42 GREEN（トリッキー：歩行可だがRR↑）
-{name:'カワグチ ヒロシ',age:41,d:'41歳男性。瓦礫の中から自力で這い出して歩いてきた。呼吸31回/分。',canWalk:true,breathing:'yes',respiratoryRate:31,radialPulse:'normal',paleColdSweat:false,heartRate:118,followsCommands:true},
+{name:'カワグチ ヒロシ',age:41,narrative:'男性。瓦礫の中から自力で這い出して歩いてきた。',canWalk:true,breathing:'yes',respiratoryRate:31,radialPulse:'normal',paleColdSweat:false,heartRate:118,followsCommands:true},
 // 43 GREEN（トリッキー：歩行可・橈骨不可）
-{name:'マツダ アキコ',age:60,d:'60歳女性。化学物質にさらされふらつきつつも歩行可。橈骨動脈が触知できない状態。',canWalk:true,breathing:'yes',respiratoryRate:26,radialPulse:'none',paleColdSweat:false,heartRate:120,followsCommands:true},
+{name:'マツダ アキコ',age:60,narrative:'女性。化学物質にさらされふらつきつつも歩行可。橈骨動脈が触知できない状態。',canWalk:true,breathing:'yes',respiratoryRate:26,radialPulse:'none',paleColdSweat:false,heartRate:120,followsCommands:true},
 ];
 
+// ============================================================
+// HX・PREG・SECONDARY
+// ============================================================
 const HX=[
   {t:'なし',r:false},{t:'なし',r:false},{t:'片頭痛',r:false},{t:'なし',r:false},
   {t:'気管支喘息',r:true},{t:'高血圧',r:false},{t:'なし',r:false},{t:'なし',r:false},
@@ -576,7 +580,7 @@ const PREG=[20,null,null,null,null,null,null,30,null,null,null,null,null,null,nu
 
 // dbp:82 はデフォルト値（拡張期血圧）
 // anatomical: PAT第2段階の判定基準に該当する所見のみ（該当で即・赤）
-// obs: 表示専用の観察所見（画面には出すが判定には使わない）
+// obs: 表示専用の観察所見（画面・読み上げには出すが判定には使わない）
 function N(){return {gcs:15,rr:16,pulse:80,sbp:124,dbp:82,spo2:98,temp:36.6,shock:false,anatomical:[],obs:[],mechanism:[]};}
 function S(o,note){return Object.assign(N(),o,{changeNote:note});}
 
@@ -588,10 +592,10 @@ const SECONDARY=[
   S({rr:22,pulse:88,sbp:132,dbp:84,spo2:95,temp:36.8},'咳嗽継続。経過観察が必要'),                                                             // 4 緑→黄（基礎疾患:喘息）
   S({pulse:78,sbp:148,dbp:90,spo2:97},'打撲のみで安定'),                                                                       // 5 緑→緑
   S({rr:18,pulse:86,sbp:128,spo2:97,temp:36.7},'明らかな悪化なし。経過観察'),                                                            // 6 黄→黄
-  S({rr:22,pulse:92,sbp:116,dbp:72,temp:36.8,obs:['足関節の変形・腫脹']},'足関節の変形・腫脹'),           // 7 黄→黄（第4段階:妊婦30週に該当も黄据え置き）
+  S({rr:22,pulse:92,sbp:116,dbp:72,temp:36.8,obs:['足関節の変形・腫脹']},'足関節の変形・腫脹'),           // 7 黄→黄（第4段階:妊婦30週に該当も、引き上げは緑→黄のみ＝黄は据え置き。足関節変形は第2段階基準外の表示専用）
   S({rr:24,pulse:94,sbp:126,spo2:97},'胸部症状継続'),                                                          // 8 黄→黄
-  S({gcs:13,rr:20,pulse:92,sbp:142,dbp:110,spo2:94,temp:37.0,obs:['大腿部の腫脹']},'大腿部の腫脹が増大。頻脈・血圧上昇・SpO2低下あり'),                   // 9 黄→黄（第4段階:高齢65・糖尿に該当も黄据え置き）
-  S({rr:23,pulse:76,sbp:128,temp:36.5,anatomical:['両下肢の運動・感覚消失']},'両下肢の運動・感覚消失'),              // 10 黄→赤（解剖）
+  S({gcs:13,rr:20,pulse:92,sbp:142,dbp:110,spo2:94,temp:37.0,obs:['大腿部の腫脹']},'大腿部の腫脹が増大。頻脈・血圧上昇・SpO2低下あり'),                   // 9 黄→黄（第4段階:高齢65・糖尿に該当も、引き上げは緑→黄のみ＝黄は据え置き。大腿部腫脹は第2段階基準外の表示専用）
+  S({rr:23,pulse:76,sbp:128,temp:36.5,anatomical:['両下肢の運動・感覚消失']},'両下肢の運動・感覚消失'),              // 10 黄→赤（解剖）★Ver.2.1新赤
   S({rr:29,pulse:82,sbp:112,dbp:70,spo2:99,temp:36.4},'膝の痛みのみ'),                                                       // 11 黄→黄
   S({rr:29,dbp:80,temp:36.5},'麻痺所見なし。神経学的に安定'),                                                           // 12 黄→黄
   S({rr:34,pulse:124,sbp:91,dbp:42,spo2:86,anatomical:['頸静脈の怒張、気管の偏位、患側の呼吸音消失']},'患側の呼吸音消失・気管偏位、血圧低下・SpO2低下'), // 13 赤
@@ -607,7 +611,7 @@ const SECONDARY=[
   S({gcs:13,rr:22,pulse:86,sbp:128,dbp:80,spo2:91,temp:36.7,anatomical:['骨盤部の動揺・圧痛']},'骨盤部に動揺と圧痛あり。SpO2低下あり'),      // 23 黄→赤（高齢67）
   S({gcs:10,pulse:110,sbp:84,dbp:56,spo2:92,temp:34.5,shock:true,mechanism:['体幹部の挟圧']},'体幹部に4時間以上の挟圧。ショック・低体温、頻脈・SpO2低下あり'), // 24 赤
   S({gcs:8,rr:18,pulse:52,sbp:182,dbp:110,spo2:94},'頭部外傷あり。血圧上昇・徐脈・SpO2低下'),                                                           // 25 赤
-  S({gcs:12,rr:20,pulse:82,sbp:82,dbp:61,spo2:94,temp:36.7,mechanism:['高所墜落'],anatomical:['両上肢痺れ、知覚鈍麻']},'3階相当（約9m）からの高所墜落。血圧低下・SpO2低下、両上肢の痺れ・知覚鈍麻あり'), // 26 赤
+  S({gcs:12,rr:20,pulse:82,sbp:82,dbp:61,spo2:94,temp:36.7,mechanism:['高所墜落'],anatomical:['両上肢痺れ、知覚鈍麻']},'3階相当（約9m）からの高所墜落。血圧低下・SpO2低下、両上肢の痺れ・知覚鈍麻あり'), // 26 赤（高齢70・受傷機転）
   S({gcs:8,rr:30,pulse:116,sbp:100,dbp:76,spo2:86,anatomical:['口腔内の出血、気道狭窄音（喘鳴）']},'気道確保の継続が必要、頻呼吸・SpO2低下'), // 27 赤
   S({gcs:10,rr:24,pulse:110,sbp:135,dbp:94,spo2:84,anatomical:['顔面の変形、口腔内出血、気道狭窄音']},'顔面の変形・気道の不安定、頻呼吸・頻脈・SpO2低下'),       // 28 赤
   null,null,null,null,                                                                                         // 29-32 黒
@@ -616,25 +620,27 @@ const SECONDARY=[
   S({rr:10,sbp:136,dbp:86},'症状改善傾向。状態安定'),                                                         // 35 黄→黄
   S({gcs:10,rr:29,pulse:128,sbp:80,dbp:52,spo2:88,shock:true,mechanism:['爆発']},'爆発（爆風・破片）による多発外傷。出血が続き血圧低下・SpO2低下あり'), // 36 赤
   S({gcs:10,rr:8,pulse:112,spo2:86,mechanism:['NBC災害（化学剤・神経剤）'],anatomical:['縮瞳・流涎']},'化学剤（神経剤）への曝露。呼吸抑制・頻脈・SpO2低下、縮瞳・流涎あり'), // 37 赤
-  S({gcs:12,rr:32,pulse:86,sbp:126,spo2:90,temp:36.8,mechanism:['爆発']},'近距離爆発の爆風により受傷。頻呼吸・SpO2低下あり'),                        // 38 赤
+  S({gcs:12,rr:32,pulse:86,sbp:126,spo2:90,temp:36.8,mechanism:['爆発']},'近距離爆発の爆風により受傷。頻呼吸・SpO2低下あり'),                        // 38 赤（受傷機転）
   S({rr:31,spo2:89,anatomical:['患側の呼吸音減弱、胸郭運動の左右差']},'呼吸促迫・SpO2低下、胸郭運動に左右差あり'), // 39 赤
-  S({rr:34,pulse:74,sbp:118,dbp:76,spo2:94,temp:36.5},'歩行可能だったが頻呼吸（34回/分）継続、詳細評価が必要'),                   // 40 緑→赤
-  S({rr:20,pulse:92,sbp:122,dbp:78,spo2:97,temp:36.9,mechanism:['爆発']},'爆発による多発性受傷。状態はやや不安定'),                             // 41 緑→黄
-  S({rr:31,pulse:82,dbp:80,spo2:94},'歩行可能だったが頻呼吸（31回/分）継続、経過観察が必要'),                           // 42 緑→赤
-  S({rr:18,pulse:84,sbp:152,dbp:94,spo2:97,temp:36.9},'症状継続のため経過観察が必要'),                                                         // 43 緑→黄
+  S({rr:34,pulse:74,sbp:118,dbp:76,spo2:94,temp:36.5},'歩行可能だったが頻呼吸継続、詳細評価が必要'),                   // 40 緑→赤（頻呼吸）
+  S({rr:20,pulse:92,sbp:122,dbp:78,spo2:97,temp:36.9,mechanism:['爆発']},'爆発による多発性受傷。状態はやや不安定'),                             // 41 緑→黄（受傷機転）
+  S({rr:31,pulse:82,dbp:80,spo2:94},'歩行可能だったが頻呼吸継続、経過観察が必要'),                           // 42 緑→赤（頻呼吸）
+  S({rr:18,pulse:84,sbp:152,dbp:94,spo2:97,temp:36.9},'症状継続のため経過観察が必要'),                                                         // 43 緑→黄（基礎疾患:透析）
 ];
 
+// attach
 PT.forEach((p,i)=>{
   p.secondary=SECONDARY[i]||null;
   const h=HX[i]; p.hx=h?h.t:'なし'; p.hxRisk=h?!!h.r:false;
   p.pregWeeks=PREG[i]||null;
 });
 
-// スマホ版はStage 1・2のみ（傷病者No.・構成はPC統合版と同一）
+// スマホ版はStage 1・2のみ（傷病者No.・構成はPC版SSOTと同一。build-mobile.mjsが先頭2件を注入）
 const STAGES=[
-  {name:'Stage 1｜雑踏事故',    ids:[0,1,2,3,4,6,7,8,9,10,11,13,14,15,29]},
-  {name:'Stage 2｜交通多重事故', ids:[0,1,2,6,7,8,9,13,14,15,16,20,21,22,25,26,27,29,30,23]},
+  {name:"Stage 1｜雑踏事故",ids:[0,1,2,3,4,6,7,8,9,10,11,13,14,15,29]},
+  {name:"Stage 2｜交通多重事故",ids:[0,1,2,6,7,8,9,13,14,15,16,20,21,22,25,26,27,29,30,23]},
 ];
+// === SSOT-DATA:END ===
 
 // ============================================================
 // GAME STATE
@@ -778,8 +784,8 @@ function renderPatient(){
 
   let html='<div class="patient-card">';
   const primaryTagHtml=isPAT?`<span class="primary-tag">1次 ${chip(judge(p))}</span>`:'';
-  html+=`<div class="pc-hdr"><span class="pc-num">No.${pid+1}</span><span class="pc-name">${p.name}</span>${primaryTagHtml}</div>`;
-  html+=`<div class="pc-desc">${p.d}</div>`;
+  html+=`<div class="pc-hdr"><span class="pc-num">No.${pid+1}</span><span class="pc-name">${p.name}（${p.age}歳）</span>${primaryTagHtml}</div>`;
+  html+=`<div class="pc-desc">${p.narrative}</div>`;
 
   if(isPAT && p.secondary){
     const s=p.secondary;
