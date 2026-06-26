@@ -45,6 +45,8 @@ button{font-family:inherit;-webkit-user-select:none;user-select:none;}
 .badge-pat{background:#1565C0;color:#fff;}
 .mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .mode-btn{padding:8px 10px;border-radius:10px;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.09);color:#fff;font-size:.88em;font-weight:bold;cursor:pointer;text-align:left;line-height:1.35;display:block;width:100%;}
+/* モード説明文は常に1行（狭い機種での折り返し防止） */
+.mode-btn small{white-space:nowrap;}
 .mode-btn.sel{background:rgba(239,108,0,.85);border-color:#EF6C00;}
 .mode-icon{font-size:1.1em;margin-right:3px;}
 .stage-section{margin-bottom:9px;}
@@ -206,7 +208,7 @@ button{font-family:inherit;-webkit-user-select:none;user-select:none;}
         <span class="mode-icon">⏱</span>タイムアタック<br><small style="opacity:.7;font-weight:normal">4分で何人判定できるか</small>
       </button>
       <button class="mode-btn" data-triage="pat" data-mode="practice" onclick="selMode(this)">
-        <span class="mode-icon">📖</span>練習モード<br><small style="opacity:.7;font-weight:normal">判定後にPAT段階解説表示</small>
+        <span class="mode-icon">📖</span>練習モード<br><small style="opacity:.7;font-weight:normal">判定後にPAT解説表示</small>
       </button>
     </div>
   </div>
